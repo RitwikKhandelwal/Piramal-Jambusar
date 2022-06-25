@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "cells": [
+    {
+      "type": "cs",
+      "input": "importFiles [ \"C:\\\\Users\\\\ritwi\\\\Desktop\\\\ripik ai\\\\KSB\\\\265TPD\\\\flatfile_265TPD.csv\" ]"
+    },
+    {
+      "type": "cs",
+      "input": "setupParse source_frames: [ \"nfs:\\\\C:\\\\Users\\\\ritwi\\\\Desktop\\\\ripik ai\\\\KSB\\\\265TPD\\\\flatfile_265TPD.csv\" ]"
+    },
+    {
+      "type": "cs",
+      "input": "parseFiles\n  source_frames: [\"nfs:\\\\C:\\\\Users\\\\ritwi\\\\Desktop\\\\ripik ai\\\\KSB\\\\265TPD\\\\flatfile_265TPD.csv\"]\n  destination_frame: \"flatfile_265TPD.hex\"\n  parse_type: \"CSV\"\n  separator: 44\n  number_columns: 73\n  single_quotes: false\n  column_names: [\"Date\",\"MelterCombBlower_1_flow_rate\",\"MelterCombBlower_2_flow_rate\",\"ChimneyDraft_0_pressure\",\"DistributorForeEarthAir_0_pressure\",\"DistributorGas_0_flow_rate\",\"DistributorGas_0_pressure\",\"DistributorZonePyrometer_1_temperature\",\"DistributorZonePyrometer_2_temperature\",\"DistributorZonePyrometer_3_temperature\",\"DistributorZonePyrometer_4_temperature\",\"DistributorZonePyrometer_5_temperature\",\"DistributorZonePyrometer_6_temperature\",\"DistributorZonePyrometer_7_temperature\",\"ForeEarthGas_0_flow_rate\",\"ForeEarthGas_0_pressure\",\"Zone1Pyrometer1_j0_temperature\",\"Zone1Pyrometer2_j0_temperature\",\"Zone2Pyrometer1_j0_temperature\",\"Zone2Pyrometer2_j0_temperature\",\"Zone3Pyrometer_j0_temperature\",\"ZoneCondiPyrometer_j0_temperature\",\"Zone1PyrometerL_j1_temperature\",\"Zone1PyrometerR_j1_temperature\",\"Zone2Pyrometer_j1_temperature\",\"ZoneCondiPyrometer_j1_temperature\",\"Zone1PyrometerL_j2_temperature\",\"Zone1PyrometerR_j2_temperature\",\"Zone2Pyrometer_j2_temperature\",\"ZoneCondiPyrometer_j2_temperature\",\"FHJ3TE438AI110\",\"FHJ3Z1TE431LAI65\",\"Zone2Pyrometer_j3_temperature\",\"Zone3Pyrometer_j3_temperature\",\"Zone4Pyrometer_j3_temperature\",\"Zone5Pyrometer_j3_temperature\",\"Zone6Pyrometer_j3_temperature\",\"Zone9Pyrometer_j3_temperature\",\"FHJ4TE4410AI115\",\"FHJ4TE445AI111\",\"FHJ4TE446AI113\",\"FHJ4TE447AI112\",\"FHJ4TE449AI114\",\"Zone1Pyrometer_j4_temperature\",\"FHJ4Z1TE442AI99\",\"FHJ4Z1TE443AI910\",\"FHJ4Z1TE444AI911\",\"Zone1PyrometerL_j5_temperature\",\"Zone1PyrometerR_j5_temperature\",\"Zone2Pyrometer_j5_temperature\",\"ZoneCondiPyrometer_j5_temperature\",\"Zone1PyrometerL_j6_temperature\",\"Zone1PyrometerR_j6_temperature\",\"Zone2PyrometerL_j6_temperature\",\"Zone2PyrometerR_j6_temperature\",\"Zone3Pyrometer_j6_temperature\",\"ZoneCondiPyrometer_j6_temperature\",\"MelterFurnaceOil_0_flow_rate\",\"ChimneyFurnaceDamper_0_percent\",\"MelterFurnace_0_length\",\"DistributorGlassLevel_0_length\",\"IsmHp_j0_pressure\",\"IsmHp_j1_pressure\",\"IsmHp_j2_pressure\",\"IsmHp_j3a_pressure\",\"Draw (TPD)\",\"Cullet%\",\"Melter Optical\",\"Melter Bottom (T/C-207)\",\"Throat Riser (T/C-208)\",\"Dist Zone3\",\"Melter SFC (KCal)\",\"Seed Count\"]\n  column_types: [\"String\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\",\"Numeric\"]\n  delete_on_done: true\n  check_header: 1\n  chunk_size: 8180\n  escapechar: undefined"
+    },
+    {
+      "type": "cs",
+      "input": "getFrameSummary \"flatfile_265TPD.hex\""
+    },
+    {
+      "type": "cs",
+      "input": "splitFrame \"flatfile_265TPD.hex\", [0.75], [\"frame_0.750\",\"frame_0.250\"], 10111"
+    },
+    {
+      "type": "cs",
+      "input": "getFrameSummary \"frame_0.750\""
+    },
+    {
+      "type": "cs",
+      "input": "buildModel 'drf', {\"model_id\":\"drf-72c41d64-8f3b-4c81-b751-1139ecfd2777\",\"training_frame\":\"frame_0.750\",\"validation_frame\":\"frame_0.250\",\"nfolds\":0,\"response_column\":\"Melter SFC (KCal)\",\"ignored_columns\":[\"Date\"],\"ignore_const_cols\":true,\"ntrees\":50,\"max_depth\":20,\"min_rows\":1,\"nbins\":20,\"seed\":10111,\"mtries\":-1,\"sample_rate\":0.632,\"score_each_iteration\":false,\"score_tree_interval\":0,\"nbins_top_level\":1024,\"nbins_cats\":1024,\"r2_stopping\":1.7976931348623157e+308,\"stopping_rounds\":0,\"stopping_metric\":\"AUTO\",\"stopping_tolerance\":0.001,\"max_runtime_secs\":0,\"col_sample_rate_per_tree\":1,\"min_split_improvement\":0.00001,\"histogram_type\":\"AUTO\",\"categorical_encoding\":\"AUTO\",\"distribution\":\"AUTO\",\"gainslift_bins\":-1,\"auc_type\":\"AUTO\",\"build_tree_one_node\":false,\"sample_rate_per_class\":[],\"binomial_double_trees\":false,\"col_sample_rate_change_per_level\":1,\"calibrate_model\":false,\"check_constant_response\":true}"
+    },
+    {
+      "type": "cs",
+      "input": "getModel \"drf-72c41d64-8f3b-4c81-b751-1139ecfd2777\""
+    },
+    {
+      "type": "cs",
+      "input": "buildPartialDependence"
+    },
+    {
+      "type": "cs",
+      "input": "buildPartialDependence {\"destination_key\":\"pdp-c362fb0d-ae44-4340-892f-d76ea432161c\",\"model_id\":\"drf-72c41d64-8f3b-4c81-b751-1139ecfd2777\",\"frame_id\":\"frame_0.250\",\"cols\":\"[\\\"DistributorZonePyrometer_6_temperature\\\",\\\"Zone1Pyrometer_j4_temperature\\\",\\\"Zone1PyrometerL_j6_temperature\\\",\\\"Draw (TPD)\\\",\\\"Cullet%\\\",\\\"Melter Optical\\\",\\\"Melter Bottom (T/C-207)\\\",\\\"Throat Riser (T/C-208)\\\",\\\"Dist Zone3\\\",]\",\"targets\":\"\",\"col_pairs_2dpdp\":\"\",\"nbins\":20,\"row_index\":-1}"
+    },
+    {
+      "type": "cs",
+      "input": "getPartialDependence \"pdp-c362fb0d-ae44-4340-892f-d76ea432161c\""
+    }
+  ]
+}
